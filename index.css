@@ -198,10 +198,11 @@ h1 {
   width: 100%;
 }
 .drawer__liner {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+
+	position: relative;
 	width: 100%;
 
 	transform: translate3d(0, 0, 0);
