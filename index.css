@@ -134,7 +134,8 @@ h1 {
 		align-items: center;
 	}
 }
-.header nav a {
+.header nav a,
+.header nav button {
 	margin-left: 1em;
 }
 .header nav a,
