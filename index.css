@@ -55,12 +55,12 @@ h1 {
 	margin: 0 auto;
 	padding: 0 1rem;
 	background: repeating-linear-gradient(
-			to right,
-			#0001 0,
-			#0001 1rem,
-			#0000 1rem,
-			#0000 calc(((100% - 5rem) / 4) + 1rem)
-		);
+		to right,
+		#0001 0,
+		#0001 1rem,
+		#0000 1rem,
+		#0000 calc(((100% - 5rem) / 4) + 1rem)
+	);
 }
 @media screen and (min-width: 36rem) {
 	.inner {
@@ -199,11 +199,10 @@ h1 {
   width: 100%;
 }
 .drawer__liner {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-
-	position: relative;
 	width: 100%;
 
 	transform: translate3d(0, 0, 0);
