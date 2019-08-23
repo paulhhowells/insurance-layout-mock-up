@@ -8,56 +8,128 @@
 	<link rel="stylesheet" href="index.css" />
 </head>
 <body>
-	<div class="page drawer">
-		<div class="drawer__liner">
-			<header class="header drawer__shelf">
-				<div class="inner header__inner">
-					<div class="header__logo">
-						logo
-					</div>
-					<nav>
+	<div class="page">
+		<header class="header-nav">
+			<nav class="header-nav__inner" role="navigation">
+				<div class="header-nav__auxiliary">
+						<div class="header-nav__logo">
+							<a href="/">logo</a>
+						</div>
+						<button class="header-nav__button">show / hide menu</button>
+				</div>
+				<div class="header-nav__links">
+					<div class="header-nav__links-inner">
 						<a href="#">Link A</a>
 						<a href="#">Link B</a>
 						<a href="#">Link C</a>
-						<button>show menu</button>
-					</nav>
-				</div>
-			</header>
-			<div class="drawer__main">
-				<main>
-					<section class="intro-section">
-						<div class="inner intro-section__inner">
-							<div class="max-three-quarter-width">
-								<h1>Peace of mind, simplified</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur feugiat tellus, in viverra eros mollis id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ullamcorper enim sed lectus aliquet fringilla.</p>
-							</div>
-						</div>
-					</section>
-					<section class="another-section">
-						<div class="inner another-section__inner">
-							<div class="max-three-quarter-width">
-								<h1>Key benefits</h1>
-								<p>Vivamus odio dolor, molestie vitae porttitor quis, fermentum vitae augue. Proin elementum arcu sit amet suscipit fermentum. Nulla sed aliquam est, ut eleifend erat. Ut mollis nec nisi eget pharetra. Quisque sed condimentum urna.</p>
-							</div>
-							<div class="grid">
-								<div class="grid__item">A</div>
-								<div class="grid__item">B</div>
-								<div class="grid__item">C</div>
-								<div class="grid__item">D</div>
-								<div class="grid__item">E</div>
-								<div class="grid__item">F</div>
-								<div class="grid__item">G</div>
-							</div>
-						</div>
-					</section>
-				</main>
-				<footer class="footer">
-					<div class="inner footer__inner">
-						Footer
+						<a href="#">Link D</a>
 					</div>
-				</footer>
+				</div>
+			</nav>
+		</header>
+
+		<main class="page__main">
+			<section class="intro-section">
+				<div class="inner intro-section__inner">
+					<div class="max-three-quarter-width">
+						<h1>Peace of mind, simplified</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur feugiat tellus, in viverra eros mollis id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ullamcorper enim sed lectus aliquet fringilla.</p>
+						<button class="new-button">Choose package</button>
+					</div>
+				</div>
+			</section>
+			<section class="another-section">
+				<div class="inner another-section__inner">
+					<div class="max-three-quarter-width">
+						<h1>Key benefits</h1>
+						<p>Vivamus odio dolor, molestie vitae porttitor quis, fermentum vitae augue. Proin elementum arcu sit amet suscipit fermentum. Nulla sed aliquam est, ut eleifend erat. Ut mollis nec nisi eget pharetra. Quisque sed condimentum urna.</p>
+					</div>
+					<div class="grid">
+						<div class="grid__item">A</div>
+						<div class="grid__item">B</div>
+						<div class="grid__item">C</div>
+						<div class="grid__item">D</div>
+						<div class="grid__item">E</div>
+						<div class="grid__item">F</div>
+						<div class="grid__item">G</div>
+						<div class="grid__item">H</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="inner footer__inner">
+				Footer
 			</div>
-		</div>
+		</footer>
+
+		<div id="overlay" class="overlay"></div>
 	</div>
+
+	<script>
+		const overlay = document.getElementById('overlay');
+		const navButton = document.querySelector('.header-nav__button');
+		const page = document.querySelector('.page');
+		let navVisible = false;
+
+		navButton.addEventListener('click', function () {
+			navVisible = !navVisible;
+
+			if (navVisible) {
+				overlay.classList.add('is-visible');
+				document.body.classList.add('no-scroll');
+				navButton.textContent = 'close menu';
+				enter();
+			}
+			else {
+				overlay.classList.remove('is-visible');
+				document.body.classList.remove('no-scroll');
+				navButton.textContent = 'show menu';
+				leave();
+			}
+		});
+
+		// Classes based on react-transition-group.
+		// nav--enter
+		// nav--enter-active
+		// nav--enter-done
+		// nav--leave
+		// nav--leave-active
+		// nav--leave-done
+
+		// Crude versions that ignore state change during operation.
+		function enter () {
+			page.classList.add('nav--enter');
+			page.classList.remove('nav--leave');
+			page.classList.remove('nav--leave-active');
+
+			window.requestAnimationFrame(enterActive);
+		}
+
+		function enterActive () {
+			page.classList.add('nav--enter-active');
+		}
+
+		function leave () {
+			page.classList.add('nav--leave');
+			page.classList.remove('nav--enter');
+			page.classList.remove('nav--enter-active');
+
+			window.requestAnimationFrame(leaveActive);
+		}
+
+		function leaveActive () {
+			page.classList.add('nav--leave-active');
+
+			setTimeout(cleanUp, 1020);
+		}
+
+		function cleanUp () {
+			page.classList.remove('nav--leave');
+			page.classList.remove('nav--leave-active');
+			page.classList.remove('nav--enter');
+			page.classList.remove('nav--enter-active');
+		}
+	</script>
 </body>
 </html>
